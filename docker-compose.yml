@@ -1,0 +1,18 @@
+services:
+  web-app:
+    build:
+      context: .
+    ports:
+      - "5433:5432"
+      - "8000:8000"
+
+    volumes:
+      - ./service:/service
+    environment:
+      - DB_HOST=database
+      - DB_NAME=dbname
+      - DB_USER=dbuser
+      - DB_PASS=pass
+
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
